@@ -87,6 +87,13 @@ case "$1" in
             echo "Minecraft server is not running."
         fi
         ;;
+	console)
+        if is_server_running; then
+            screen -r minecraft
+        else
+            echo "Minecraft server is not running."
+        fi
+        ;;
 	*)
         echo "Usage: $0 {start|stop|status}"
         exit 1
