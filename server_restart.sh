@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # server file name
-SERVER_FILE="server.jar"
+SERVER_FILE="forge.jar"
 
 # server manager path
 SERVER_MANAGER_DIR="/home/alkrist/minecraft"
@@ -9,9 +9,13 @@ SERVER_MANAGER_DIR="/home/alkrist/minecraft"
 # server manager file
 SERVER_MANAGER_FILE="server_manager.sh"
 
+# memory allocation
+MAX_MEMORY="12288M"
+MIN_MEMORY="4096M"
+
 # check if server is running
 is_server_running(){
-    pgrep -f "java -Xmx12288M -Xms4096M -jar $SERVER_FILE" > /dev/null
+    pgrep -f "java -Xmx$MAX_MEMORY -Xms$MIN_MEMORY -jar $SERVER_FILE" > /dev/null
 }
 
 # waits until the server is running, used to prevent any further actions

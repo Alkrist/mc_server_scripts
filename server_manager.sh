@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # server file name
-SERVER_FILE="server.jar"
+SERVER_FILE="forge.jar"
 
 # handler file
 HANDLER_FILE="/home/alkrist/minecraft/server_handler.sh"
@@ -18,6 +18,9 @@ SERVER_PID_FILE="$PID_DIR/pidfile_server.pid"
 # file to store the handler process ID
 HANDLER_PID_FILE="$PID_DIR/pidfile_handler.pid"
 
+# memory allocation
+MAX_MEMORY="12288M"
+MIN_MEMORY="4096M"
 
 if [ ! -d "$PID_DIR" ]; then
     mkdir "$PID_DIR"
@@ -26,7 +29,7 @@ fi
 # start server
 start_server(){
     cd "$SERVER_DIR" || exit
-    screen -S minecraft -d -m java -Xmx12288M -Xms4096M -jar "$SERVER_FILE" nogui
+    screen -S minecraft -d -m java -Xmx$MAX_MEMORY -Xms$MIN_MEMORY -jar "$SERVER_FILE" nogui
 
     echo "minecraft" > "$SERVER_PID_FILE"
 
@@ -36,7 +39,7 @@ start_server(){
 
 # check if server is running
 is_server_running(){
-    pgrep -f "java -Xmx12288M -Xms4096M -jar $SERVER_FILE" > /dev/null
+    pgrep -f "java -Xmx$MAX_MEMORY -Xms$MIN_MEMORY -jar $SERVER_FILE" > /dev/null
 }
 
 # stop server
